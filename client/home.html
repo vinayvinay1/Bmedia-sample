@@ -1,0 +1,46 @@
+<body>
+<div>
+    <header>
+        <h1>Vinay Madisetty GIF Maker</h1>
+    </header>
+    <div class="container">
+        <div>
+            <div id="dropDiv" ondrop="" ondragover=""><span>Drag and <em>Drop</em> here</span></div>
+            <br>
+        </div>
+        <figure id="div1">
+            {{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> myform}}
+        </figure>
+
+        <figure>
+            {{> image}}
+        </figure>
+
+
+        <figure>
+            <img src="" id="gif">
+        </figure>
+
+    </div>
+</div>
+
+
+</body>
+<template name="gifmaker">
+    <input class="img-inputs" type=file accept="image/*"/>
+</template>
+
+<template name="myform">
+    <form class="new-task">
+        <input type="number" name="interval" default="10" placeholder="milliseconds" />
+        <button>Submit</button>
+    </form>
+</template>
+
+<template name="image">
+    <ol>
+        {{#each images}}
+            <img src="{{this.url}}" height="200px" width="200">
+        {{/each}}
+    </ol>
+</template>
