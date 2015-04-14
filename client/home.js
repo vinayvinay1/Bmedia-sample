@@ -1,8 +1,6 @@
 Imageurls = [];
 Imageids = [];
-
-imgs = new Mongo.Collection("imgs");
-
+id = '';
 
 Images = new FS.Collection("images", {
     stores: [new FS.Store.FileSystem("images", FS.Store.rootPath)],
@@ -12,15 +10,25 @@ Images = new FS.Collection("images", {
 });
 
 if(Meteor.isClient){
+    Template.gifmaker.created = function(){
+        this.state = new ReactiveDict();
+        this.state.set('thumbnails', false);
+        this.state.set('imagesrc', '');
+        this.state.set('_id', '');
+    };
+
     Template.gifmaker.events({
         "change input[type='file']":function(event,template){
+            //template.state.set('thumbnails', true);
             var files=event.target.files;
             var file=files[0];
 
             Images.insert(file, function (err, fileObj) {
                 if(!err){
                 Imageids.push(fileObj._id);
+                    id = fileObj._id;
                 }
+                template.state.set('thumbnails', true);
             });
         }
     });
@@ -52,32 +60,16 @@ if(Meteor.isClient){
         }
     });
 
-
-    Template.image.helpers({
-        /*
-        images:function(){
-            if (Session.get("visibility")){
-                var temp = [];
-                for(i in Imageids){
-                    temp.push("imageurl",Images.findOne({_id:Imageids[i]}).url());
-                }
-                Session.set("visibility", false);
-                alert(temp.toString());
-                return temp;
-            }
-        }*/
-
-
-
-
-
-
-
-
-
-
-
-
+    Template.gifmaker.helpers({
+        thumbnails : function(){
+            return Template.instance().state.get('thumbnails');
+        },
+        imagesrc : function(){
+            if (id){
+                Template.instance().state.set('imagesrc', Images.findOne({_id: id}).url());
+                return Template.instance().state.get('imagesrc');
+            }meteor
+        }
     });
 
 }

@@ -29,10 +29,10 @@ header {
     padding: 20px 15px 5px 15px;
     position: relative;
 }
-/*
-#div1
+
+#div1,#div2,#div3,#div4,#div5
 {float:left; width:300px; height:300px; margin:10px;border:1px solid none;}
-*/
+
 img {
     background-size: contain;
     border-color: black;

@@ -9,14 +9,23 @@
             <br>
         </div>
         <figure id="div1">
-            {{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> gifmaker}}{{> myform}}
+            {{> gifmaker}}
         </figure>
-
+        <figure id="div2">
+            {{> gifmaker}}
+        </figure>
+        <figure id="div3">
+            {{> gifmaker}}
+        </figure>
+        <figure id="div4">
+            {{> gifmaker}}
+        </figure>
+        <figure id="div5">
+            {{> gifmaker}}
+        </figure>
         <figure>
-            {{> image}}
+            {{> myform}}
         </figure>
-
-
         <figure>
             <img src="" id="gif">
         </figure>
@@ -27,20 +36,15 @@
 
 </body>
 <template name="gifmaker">
-    <input class="img-inputs" type=file accept="image/*"/>
+        <input class="img-inputs btn" type=file accept="image/*"/>
+        {{#if thumbnails}}
+            <img src="{{imagesrc}}" height="200px" width="200">
+        {{/if}}
 </template>
 
 <template name="myform">
     <form class="new-task">
         <input type="number" name="interval" default="10" placeholder="milliseconds" />
-        <button>Submit</button>
+        <button class="btn" a>Submit</button>
     </form>
-</template>
-
-<template name="image">
-    <ol>
-        {{#each images}}
-            <img src="{{this.url}}" height="200px" width="200">
-        {{/each}}
-    </ol>
 </template>
